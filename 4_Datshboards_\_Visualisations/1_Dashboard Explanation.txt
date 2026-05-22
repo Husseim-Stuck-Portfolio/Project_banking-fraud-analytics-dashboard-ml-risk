@@ -1,0 +1,5 @@
+The best dashboard will help answer questions like:
+	•	Which transactions are most likely fraudulent?
+	•	Which merchants, locations, or devices show risk?
+	•	Do fraud cases happen more often at unusual times or after failed transactions?
+	•	How do transaction amount, distance from home, and account balance relate to fraud?
