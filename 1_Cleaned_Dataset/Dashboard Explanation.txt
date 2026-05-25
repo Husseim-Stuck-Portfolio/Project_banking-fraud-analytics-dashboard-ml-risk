@@ -1,0 +1,59 @@
+The best dashboard will help answer questions like:
+	•	Which transactions are most likely fraudulent?
+	•	Which merchants, locations, or devices show risk?
+	•	Do fraud cases happen more often at unusual times or after failed transactions?
+	•	How do transaction amount, distance from home, and account balance relate to fraud?
+	
+	
+Calculated Fields and Labels:
+	•	 Is Fraud 
+	•	 IF fraud_label = 1 THEN "Fraud" ELSE "Not Fraud" END 
+	•	 Fraud Count 
+	•	 SUM(IF fraud_label = 1 THEN 1 ELSE 0 END) 
+	•	 Fraud Rate 
+	•	 SUM(IF fraud_label = 1 THEN 1 ELSE 0 END) / COUNT(fraud_label) 
+	•	 Transaction Hour 
+	•	If  transaction_time  is a proper time field, use  DATEPART('hour', transaction_time) 
+	•	 High Risk Flag 
+	•	Example: flag rows where  distance_from_home  is high,  failed_transaction_count  is above 0, or  unusual_time_transaction  is true.
+A simple risk score can also help:
+	•	 Risk Score 
+	•	Give points for  previous_fraud_count ,  is_international_transaction ,  is_new_merchant ,  failed_transaction_count , and high  distance_from_home .
+	
+	
+	
+Build the core worksheets:
+
+You should create one worksheet for each major question. This keeps the dashboard clean and easy to manage.
+A. KPI summary sheet
+Create a top row of key numbers:
+	•	Total transactions.
+	•	Fraud rate.
+	•	Total fraudulent transactions.
+	•	Average transaction amount.
+	•	Average distance from home.
+	•	Number of customers.
+Use big, clear number tiles so someone can understand the dataset at a glance.
+B. Fraud over time
+This chart shows whether fraud increases or decreases over time. Put  transaction_date  on Columns and count of rows on Rows, then color by  fraud_label . A line chart works well here.
+C. Fraud by merchant category
+Put  merchant_category  on Rows and count of transactions on Columns. Color by fraud rate or fraud count. This helps identify risky business categories.
+D. Fraud by transaction amount
+Use a box plot or histogram for  transaction_amount_in_million , split by  fraud_label . This helps compare whether fraud transactions tend to be larger or smaller than normal ones.
+E. Fraud by distance from home
+Use  distance_from_home  on Rows and  fraud_label  on Columns with a box plot. This is useful because fraud often happens at unusual locations compared with the customer’s home location.
+F. Time-of-day fraud heatmap
+Use  Transaction Hour  and day of week to create a heatmap. Color by fraud count or fraud rate. This is excellent for spotting unusual time patterns.
+G. Merchant or device risk table
+Create a ranked table showing:
+	•	 merchant_id 
+	•	 merchant_category 
+	•	 device_id 
+	•	 ip_address 
+	•	fraud count
+	•	fraud rate
+	•	average transaction amount
+	
+	
+	
+	
